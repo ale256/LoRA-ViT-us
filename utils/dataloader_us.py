@@ -84,7 +84,6 @@ def usDataloader(cfg, datapath="Dataset_BUSI_with_GT/"):
     val_dataset, test_dataset = random_split(
         temp_dataset, [val_size, test_size]
     )
-    print(len(train_dataset),'==')
 
     train_loader = DataLoader(
         train_dataset,
@@ -107,7 +106,6 @@ def usDataloader(cfg, datapath="Dataset_BUSI_with_GT/"):
         num_workers=cfg.num_workers,
         drop_last=True,
     )
-    print(len(train_loader), len(test_loader), len(val_loader),'=========')
 
     return train_loader, val_loader, test_loader
 

@@ -190,7 +190,9 @@ if __name__ == "__main__":
     # trainset,valset, testset=nihDataloader(cfg)
     # trainset,valset, testset=cxpDataloader(cfg)
     # valset,testset=mimicDataloader(cfg)
-    trainset, valset, testset = usDataloader(cfg, datapath="/home/featurize/data/LoRA-ViT-us/Dataset_BUSI_with_GT")
+    trainset, valset, testset = usDataloader(
+        cfg, datapath="Dataset_BUSI_with_GT/"
+    )
     loss_func = nn.BCEWithLogitsLoss().to(device)
     optimizer = optim.Adam(net.parameters(), lr=cfg.lr)
     scheduler = CosineAnnealingLR(optimizer, cfg.epochs, 1e-6)
@@ -213,7 +215,7 @@ if __name__ == "__main__":
                 )
 
                 # torch.save(net.state_dict(), ckpt_path.replace(".pt", "_best.pt"))
-                print('===', len(testset))
+                print("===", len(testset))
                 eval(epoch, testset, datatype="test")
                 logging.info(
                     f"BEST VAL: {result.best_val_result:.3f}, TEST: {result.test_auc:.4f}, EPOCH: {(result.best_epoch):3}"
